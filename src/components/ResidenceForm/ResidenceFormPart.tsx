@@ -13,7 +13,7 @@ export const ResidenceFormPart = (props: ResidenceFormPartProps) => {
     const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         const field = form.fieldDefinitions.find((field: FormObject) => field.label === id.split('_')[0]);
-        console.log(field);
+
         const result = validateField(field.label)(value);
         const errorsObject = {[field.label]: result};
         field.value = value;
@@ -24,7 +24,7 @@ export const ResidenceFormPart = (props: ResidenceFormPartProps) => {
     (value: unknown): string => {
         const field = ResidenceFormZodType.pick({ [field_name]: true });
         const result = field.safeParse({ [field_name]: value });
-        console.log(result);
+
         return !result.success ? result.error.errors[0].message : "";
     }
 
